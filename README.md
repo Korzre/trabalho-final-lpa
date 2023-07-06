@@ -13,7 +13,7 @@ Proponha as seguintes modificações:
 * O trabalho deverá estar disponível em um repositório público no GitHub.
 
 
-```
+```java
 import java.util.Scanner;
 
 public class ListaProdutos {

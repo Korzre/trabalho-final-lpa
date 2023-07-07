@@ -118,7 +118,7 @@ public class ListaProdutos {
 }
 ```
 
-# O que eu fiz ✅:
+# O que eu fiz ✅
 
 * Melhorar o visual do programa
 * Tornar a interatividade com o usuário muito melhor
@@ -127,8 +127,9 @@ public class ListaProdutos {
 
 * Eu respeitei o código implementado pelo professor, toda lógica foi mantida mas tive que fazer algumas alterações
 
-# Futuras ideias 🔮:
 * Botão imprimir, para gerar um ficheiro txt com tudo que está no textarea.
+
+# Futuras ideias 🔮
 
 * Criação de um campo categoria
 * Botão pesquisar, ao editar um produto ele meio que pesquisa então não tenho tanta certeza se quero implementar (talvez um dia!)
@@ -160,6 +161,14 @@ Ex:
 **Calcular valor:** no botão calcular valor ele vai pegar a qtd e multiplicar ela pelo valor, depois vai somar com todos os outros produtos.
 
 **Remover produto:** no botão remover produto ele primeiro vai pedir para digitar o nome do produto que deseja remover, o programa vai pesquisar na matriz se existe tal produto para poder remover, depois virá um aviso de produto removido.
+
+# Ficheiro executável 🗳️:
+
+<a href="trabalho-lpa.jar">
+<i>Faça o download da versão executável do projeto<i>
+<img src="image/jarfile.svg">
+</a>
+
 
 # Ferramentas utilizadas 🛠️:
 

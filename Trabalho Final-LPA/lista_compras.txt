@@ -1,0 +1,4 @@
+Lista de Compras:
+1 - tomate | 4 | 500
+2 - arroz doce | 11 | 1200
+Valor final da lista de compras: R$15200.0

@@ -1,13 +1,20 @@
 package visual;
 
 import javax.swing.*;
+
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 @SuppressWarnings("serial")
 public class ListaProdutos extends JFrame {
 	private String[][] lista;
+	private float valorFinal_= 0.0f;
 	private int produtos;
 	private int colunas = 3;
 	private JTextField nomeProdutoField;
@@ -26,7 +33,7 @@ public class ListaProdutos extends JFrame {
 	private void initComponents() {
 		setTitle("Lista de Compras");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(550, 300);
+		setSize(580, 300);
 		setLayout(new BorderLayout());
 
 		JPanel panel = new JPanel();
@@ -115,11 +122,19 @@ public class ListaProdutos extends JFrame {
 				removerProduto();
 			}
 		});
+		
+		JButton imprimirButton = new JButton("Imprimir");
+        imprimirButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	imprimirLista();
+            }
+        });
 
 		buttonsPanel.add(inserirButton);
 		buttonsPanel.add(editarButton);
 		buttonsPanel.add(calcularButton);
 		buttonsPanel.add(removerButton);
+		buttonsPanel.add(imprimirButton);
 		
 
 		panel.add(label, BorderLayout.NORTH);
@@ -131,6 +146,8 @@ public class ListaProdutos extends JFrame {
 
 		setVisible(true);
 	}
+	
+	
 
 	private void inserirProduto() {
 		String nomeProduto = nomeProdutoField.getText();
@@ -193,19 +210,58 @@ public class ListaProdutos extends JFrame {
 		}
 	}
 
-	private void calcularValor() {
-		float valorFinal = 0.0f;
+	public void calcularValor() {		
 
 		for (int i = 0; i < produtos; i++) {
 			if (lista[i][0] != null) {
 				float quantidade = Float.parseFloat(lista[i][1]);
 				float valor = Float.parseFloat(lista[i][2]);
-				valorFinal += quantidade * valor;
+				valorFinal_ += quantidade * valor;
 			}
 		}
+		
 
-		JOptionPane.showMessageDialog(this, "Valor final da lista de compras: R$" + valorFinal + " ");
+		JOptionPane.showMessageDialog(this, "Valor final da lista de compras: R$" + valorFinal_ + " ");
 	}
+	
+	public void imprimirLista() {
+		for (int i = 0; i < produtos; i++) {
+			if (lista[i][0] != null) {
+				float quantidade = Float.parseFloat(lista[i][1]);
+				float valor = Float.parseFloat(lista[i][2]);
+				valorFinal_ += quantidade * valor;
+			}
+		}
+		
+        StringBuilder conteudoArquivo = new StringBuilder();
+        conteudoArquivo.append("Lista de Compras:\n");
+
+        for (int i = 0; i < produtos; i++) {
+            if (lista[i][0] != null) {
+                String produtoString = String.format("%d - %s | %s | %s", (i + 1), lista[i][0], lista[i][1], lista[i][2]);
+                conteudoArquivo.append(produtoString + "\n");
+            }
+        }
+
+        conteudoArquivo.append("Valor final da lista de compras: R$" + valorFinal_);
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("lista_compras.txt"))) {
+            writer.write(conteudoArquivo.toString());
+            JOptionPane.showMessageDialog(this, "Arquivo 'lista_compras.txt' gerado com sucesso!");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao gerar o arquivo 'lista_compras.txt'.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        File arquivo = new File("lista_compras.txt");
+        if (arquivo.exists()) {
+            try {
+                Desktop.getDesktop().open(arquivo);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao abrir o arquivo 'lista_compras.txt'.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+    }
 
 	private void removerProduto() {
 		String nomeProduto = JOptionPane.showInputDialog(this, "Insira o produto (nome) a ser removido:");
@@ -244,7 +300,7 @@ public class ListaProdutos extends JFrame {
         public boolean verify(JComponent input) {
             JTextField textField = (JTextField) input;
             String text = textField.getText();
-            if (!text.matches("[a-zA-Z0-9]+")) {
+            if (!text.matches("^[a-zA-Z0-9\\s]+$")) {
                 JOptionPane.showMessageDialog(ListaProdutos.this, "Digite apenas letras e números.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return false;
             }

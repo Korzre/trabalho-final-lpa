@@ -211,7 +211,7 @@ public class ListaProdutos extends JFrame {
 	}
 
 	public void calcularValor() {		
-
+		valorFinal_ = 0.0f;
 		for (int i = 0; i < produtos; i++) {
 			if (lista[i][0] != null) {
 				float quantidade = Float.parseFloat(lista[i][1]);
@@ -225,6 +225,7 @@ public class ListaProdutos extends JFrame {
 	}
 	
 	public void imprimirLista() {
+		valorFinal_ = 0.0f;
 		for (int i = 0; i < produtos; i++) {
 			if (lista[i][0] != null) {
 				float quantidade = Float.parseFloat(lista[i][1]);

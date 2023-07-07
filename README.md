@@ -164,7 +164,7 @@ Ex:
 
 # Ficheiro executável 🗳️:
 
-<a href="trabalho-lpa.jar">
+<a href="https://github.com/Korzre/trabalho-final-lpa/releases/tag/trabalho-lpa-package">
 <i>Faça o download da versão executável do projeto<i>
 <br>
 

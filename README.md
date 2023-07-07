@@ -166,7 +166,7 @@ Ex:
 
 <a href="trabalho-lpa.jar">
 <i>Faça o download da versão executável do projeto<i>
-<img src="image/jarfile.svg">
+<img src="image/jarfile.svg" with="100px" height="100px">
 </a>
 
 
